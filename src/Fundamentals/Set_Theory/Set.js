@@ -37,3 +37,55 @@ Set.prototype.mequal = function equal (set) {
   }
   return this.isSubsetOf(set)
 }
+
+Set.union = function union (set1, set2, rulesFct) {
+  const set3 = new Set(set1, rulesFct)
+  const iterator = set2.values()
+  let value
+  while ((value = iterator.next().value) !== void 0) {
+    set3.add(value)
+  }
+  return set3
+}
+
+Set.intersect = function intersect (set1, set2) {
+  const set3 = new Set([])
+  const iterator = set1.values()
+  let value
+  while ((value = iterator.next().value) !== void 0) {
+    if (set2.has(value)) {
+      set3.add(value)
+    }
+  }
+  return set3
+}
+
+Set.complement = function complement (set1, set2) {
+  const set3 = new Set([])
+  const iterator = set1.values()
+  let value
+  while ((value = iterator.next().value) !== void 0) {
+    if (!set2.has(value)) {
+      set3.add(value)
+    }
+  }
+  return set3
+}
+
+Set.symDiff = function symmetricDifference (set1, set2) {
+  const set3 = new Set([])
+
+  function addToSet (source, compare, target) {
+    const iterator = source.values()
+    let value
+    while ((value = iterator.next().value) !== void 0) {
+      if (!compare.has(value)) {
+        target.add(value)
+      }
+    }
+  }
+
+  addToSet(set1, set2, set3)
+  addToSet(set2, set1, set3)
+  return set3
+}
