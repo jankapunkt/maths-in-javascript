@@ -18,14 +18,22 @@ Set.prototype.add = (function () {
   }
 })()
 
-Set.prototype.mequal = function equal (set) {
-  if (this.size !== set.size) {
-    return false
-  }
+Set.prototype.isSupersetOf = function isSuperset (set) {
   const iterator = set.values()
   let value
   while (value = iterator.next().value) {
     if (!this.has(value)) return false
   }
   return true
+}
+
+Set.prototype.isSubsetOf = function isSubset (set) {
+  return set.isSupersetOf(this)
+}
+
+Set.prototype.mequal = function equal (set) {
+  if (this.size !== set.size) {
+    return false
+  }
+  return this.isSubsetOf(set)
 }

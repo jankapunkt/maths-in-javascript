@@ -1,6 +1,6 @@
-## 1. Introduction
+### 1.1. Introduction
 
-### 1.1. Definitions
+#### Definition
 
 > In mathematics, a set is a collection of distinct objects, considered as an object in its own right. ([Wikipedia](https://en.wikipedia.org/wiki/Set_(mathematics)))
 
@@ -122,13 +122,13 @@ console.log(nums1 === nums2) // false
 console.log(nums1 == nums2)  // false
 ```
 
-A simple implementation on `Set` can however solve this problem:
+A simple implementation on `Set` can solve this problem:
 
 ```javascript
 Set.prototype.mequal = function equal (set) {
-	if (this.size !== set.size) return false
+  if (this.size !== set.size) return false
   
- 	const iterator = set.values()
+  const iterator = set.values()
   let value
   while (value = iterator.next().value) {
   	if (!this.has(value)) return false
@@ -148,7 +148,8 @@ console.log(set1.mequal(set2)) // true
 Here we simply check a) that the sets have the same size and b) iterate all given values of the given set and check if our set contains the exact same value.
 If both conditions are met, we can assume both sets to be mathematically equal.
 
-Note: The function is named `mequal` for mathematically-equal in order to not to be confused with the `equal` in terms of computational equality. 
+*Please Note:* To check, whether to sets are equal we will use a more distinct method in the next chapter.
+
 
 #### Properties
 
@@ -218,9 +219,3 @@ const set2 = new Set([1,2,3,4.5], isInt) // throws error
 set1.add(5)   // OK
 set1.add('5') // throws error
 ```
-
-### 1.2. Basic relationships
-
-
-
-### 1.3. Basic Operations
