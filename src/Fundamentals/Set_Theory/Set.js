@@ -11,7 +11,7 @@ Set.prototype = OriginalSet.prototype
 Set.prototype.add = (function () {
   const originalAdd = Set.prototype.add
   return function add (value) {
-    if (!this.rulesFct.call(null, value)) {
+    if (this.rulesFct && !this.rulesFct.call(null, value)) {
       throw new Error(`Value [${value}] does not match ruleset.`)
     }
     return originalAdd.call(this, value)

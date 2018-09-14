@@ -8,9 +8,9 @@ We can extend our `Set` class by using the code from our previously implemented 
 
 ```javascript
 Set.prototype.isSupersetOf = function isSuperset(set) {
-	const iterator = set.values()
+  const iterator = set.values()
   let value
-  while (value = iterator.next().value) {
+  while ((value = iterator.next().value) !== void 0) {
   	if (!this.has(value)) return false
   }
   return true
